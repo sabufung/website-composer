@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.4.1'
+ruby '2.3.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.8'
@@ -31,7 +31,8 @@ gem 'spring',        group: :development
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'puma'
-
+gem 'devise'
+gem 'activeadmin', '~> 1.0.0.pre5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
