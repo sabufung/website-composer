@@ -11,5 +11,10 @@ ActiveAdmin.register Template do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+  index do
+    column :id
+    column :name
+    actions
+  end
 
 end
