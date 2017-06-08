@@ -34,6 +34,13 @@ gem 'puma'
 gem 'devise'
 gem 'activeadmin', '~> 1.0.0.pre5'
 gem 'active_admin_theme'
+gem 'less-rails-semantic_ui'
+gem 'autoprefixer-rails'
+gem 'therubyracer'
+gem 'ckeditor'
+gem 'carrierwave'
+gem 'mini_magick'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

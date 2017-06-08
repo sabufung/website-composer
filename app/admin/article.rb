@@ -11,5 +11,12 @@ ActiveAdmin.register Article do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+  permit_params :title, :content
 
+  form do |f|
+    f.inputs do
+      f.input :title
+      f.input :content, :as => :ckeditor
+    end
+  end
 end
