@@ -33,6 +33,7 @@ gem 'spring',        group: :development
 gem 'puma'
 gem 'devise'
 gem 'activeadmin', '~> 1.0.0.pre5'
+gem 'active_admin_theme'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

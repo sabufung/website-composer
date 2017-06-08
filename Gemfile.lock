@@ -20,6 +20,7 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_admin_theme (1.0.3)
     activeadmin (1.0.0)
       arbre (>= 1.1.1)
       bourbon
@@ -205,6 +206,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_admin_theme
   activeadmin (~> 1.0.0.pre5)
   coffee-rails (~> 4.0.0)
   devise
