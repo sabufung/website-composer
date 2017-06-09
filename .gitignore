@@ -25,6 +25,7 @@ config/initializers/secret_token.rb
 # dotenv
 # TODO Comment out this rule if environment variables can be committed
 .env
+config/database.yml
 
 ## Environment normalization:
 /.bundle
@@ -100,9 +101,7 @@ build-iPhoneSimulator/
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/dictionaries
+.idea/
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
