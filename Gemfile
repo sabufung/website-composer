@@ -38,7 +38,7 @@ gem 'less-rails-semantic_ui'
 gem 'autoprefixer-rails'
 gem 'therubyracer'
 gem 'ckeditor'
-gem 'carrierwave'
+gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 
 # Use Capistrano for deployment

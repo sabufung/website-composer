@@ -237,7 +237,7 @@ DEPENDENCIES
   active_admin_theme
   activeadmin (~> 1.0.0.pre5)
   autoprefixer-rails
-  carrierwave
+  carrierwave (~> 1.0)
   ckeditor
   coffee-rails (~> 4.0.0)
   devise
