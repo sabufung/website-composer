@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  resources :templates
+  get 'template/list' => 'template#list'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
