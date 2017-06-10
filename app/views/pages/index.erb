@@ -1,8 +1,33 @@
-<ul>
-  <% @pages.each.with_index do |c, i|%>
-    <li>
-      <%i%>
-      <%=c.content%>
-    </li>
-  <%end%>
-</ul>
+<div class="ui grid container">
+  <div class="row">
+    <div class="ten wide column">
+      <div class="ui devided items">
+        <% @pages.each do |c|%>
+            <div class="item">
+              <div class="image">
+                <img src="../../assets/indexbackground.png"/>
+              </div>
+              <div class="content">
+                <p class="header"><%=c.name%></p>
+                <div class="description">
+                  <%=c.content%>
+                </div>
+                <div class="extra">
+                  <select class="ui fluid dropdown selection multiple">
+                    <% @articles.each do |p|%>
+                      <option value="<%=p.id%>"><%=p.title%></option>
+                    <%end%>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <hr/>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.ui.dropdown').dropdown();
+</script>
