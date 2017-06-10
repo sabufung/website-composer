@@ -1,6 +1,6 @@
-class TemplateController < ApplicationController
+class TemplatesController < ApplicationController
 
-	def list
+	def index
 		@templates = Template.all;
 	end
 

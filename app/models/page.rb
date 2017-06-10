@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  belongs_to :template
+  belongs_to :templates
 
   def to_s
     "#{id}"

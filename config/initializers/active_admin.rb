@@ -129,7 +129,7 @@ ActiveAdmin.setup do |config|
   # to be used for ordering:
   # config.comments_order = 'created_at ASC'
   #
-  # You can disable the menu item for the comments index page:
+  # You can disable the menu item for the comments index pages:
   # config.comments_menu = false
   #
   # You can customize the comment menu:
@@ -255,11 +255,11 @@ ActiveAdmin.setup do |config|
   # == Pagination
   #
   # Pagination is enabled by default for all resources.
-  # You can control the default per page count for all resources here.
+  # You can control the default per pages count for all resources here.
   #
   # config.default_per_page = 30
   #
-  # You can control the max per page count too.
+  # You can control the max per pages count too.
   #
   # config.max_per_page = 10_000
 
