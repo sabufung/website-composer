@@ -1,4 +1,4 @@
-<div class="ui fixed inverted menu">
+<div class="ui inverted menu">
   <div class="ui container">
     <a href="#" class="header item">
       Website Composer
@@ -24,57 +24,31 @@
     </div>
   </div>
 </div>
-
+<h2 class="ui center aligned header">Responsive Grid with Variations</h2>
 <div class="ui main container">
-  <div class="ui steps">
-    <a class="active step">
-      <i class="truck icon"></i>
-      <div class="content">
-        <div class="title">Template</div>
-        <div class="description">Choose your website template</div>
-      </div>
-    </a>
-    <a class="step">
-      <div class="content">
-        <div class="title">Pages</div>
-        <div class="description">View your webstie pages</div>
-      </div>
-    </a>
-  </div>
-
-  <div class="ui vertical stripe segment">
-    <div class="ui middle aligned stackable grid container">
-      <div class="row">
-        <div class="center aligned column">
-          <div class="ui link cards">
-            <% @templates.each do |c|%>
-                <a href="<%=pages_path(:id => c.id)%>">
-                  <div class="card">
-                    <div class="image">
-                      <img src="https://semantic-ui.com/images/avatar2/large/matthew.png">
-                    </div>
-                    <div class="content">
-                      <div class="header">
-                        <%=c.name%>
-                      </div>
-                      <div class="meta">
-									<span class="date">
-										<%=c.created_at%>
-									</span>
-                      </div>
-                      <div class="description">
-                        <%=c.location%>
-                      </div>
-                    </div>
-                    <div class="extra content">
-                      Updated at: <%=c.updated_at%>
-                    </div>
-                  </div>
-                </a>
-            <% end %>
-          </div>
+  <div class="ui three column grid">
+    <% @templates.each do |template| %>
+        <div class="column">
+            <a class="ui fluid card" href="<%= pages_url(:id => template.id) %>">
+              <div class="image">
+                <img src="https://semantic-ui.com/images/avatar2/large/matthew.png">
+              </div>
+            <div class="content">
+              <div class="header">
+                <%=template.name%>
+              </div>
+              <div class="meta">
+                  <span class="date">
+                    <%=template.created_at%>
+                  </span>
+              </div>
+              <div class="description">
+                <%=template.location%>
+              </div>
+            </div>
+            </a>
         </div>
-      </div>
-    </div>
+    <% end %>
   </div>
+</div>
 </div>

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  get 'templates/index' => 'templates#index'
+  get 'templates/index' => 'templates#index' , as:'templates'
 
   get 'pages/index' => 'pages#index', as: 'pages'
 
