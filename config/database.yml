@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  username: frost
+  username: buu
   password: postgres
   database: site_composer_development
 
