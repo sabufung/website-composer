@@ -19,7 +19,7 @@
                         <option value="<%=p.id%>"><%=p.title%></option>
                     <%end%>
                   </select>
-                  <button class="ui right floated primary button" onclick="preview('page<%=i%>')">
+                  <button class="ui right floated primary button" onclick="preview('page<%=i%>', <%=c.id%>)">
                     Preview
                     <i class="right chevron icon"></i>
                   </button>
@@ -35,15 +35,27 @@
 
 <script>
     $('.ui.dropdown').dropdown();
-    
-    function preview(pageId) {
-      var ids = ($('#' + pageId).find('a.transition')).map(function(){return $(this).attr("data-value");}).get();
 
-      $.ajax({
-          type: 'GET',
-          url: 'preview',
-          dataType: 'json',
-          data: {'articleIds': ids, 'templateId' : <%=@templateId%>},
-      });
+    function preview(id, pageId) {
+        var articleIds = ($('#' + id).find('a.transition')).map(function(){return $(this).attr("data-value");}).get();
+
+        $.ajax({
+            type: 'GET',
+            url: 'previewajax',
+            dataType: 'json',
+            data: {
+                'templateId' : <%=@templateId%>,
+                'pageId' : pageId,
+                'articleIds': articleIds
+            },
+            success: function(result){
+                if(result){
+                    window.location.href = "preview"
+                }
+            },
+            error: function(){
+                alert("Error")
+            }
+        });
     }
 </script>

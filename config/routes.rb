@@ -12,10 +12,9 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get 'templates/index' => 'templates#index'
-
   get 'pages/index' => 'pages#index', as: 'pages'
-
-  get 'pages/preview' => 'pages#preview'
+  get 'pages/previewajax' => 'pages#previewajax'
+  get 'pages/preview' => 'pages#preview', as: 'preview'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
