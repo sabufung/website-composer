@@ -40,6 +40,7 @@ gem 'therubyracer'
 gem 'ckeditor'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
+gem 'rubyzip'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

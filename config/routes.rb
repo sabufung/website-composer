@@ -15,6 +15,12 @@ Rails.application.routes.draw do
 
   get 'pages/index' => 'pages#index', as: 'pages'
 
+  get 'pages/preview' => 'pages#preview', as: 'preview'
+
+  get 'pages/download' => 'pages#download', as: 'download'
+
+  get 'pages/export' => 'pages#export', as: 'export'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

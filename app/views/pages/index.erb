@@ -2,8 +2,8 @@
   <div class="row">
     <div class="ten wide column">
       <div class="ui devided items">
-        <% @pages.each do |c|%>
-            <div class="item">
+        <% @pages.each.with_index do |c, i|%>
+            <div class="item page-item" data-id="<%= c.id %>">
               <div class="image">
                 <img src="../../assets/indexbackground.png"/>
               </div>
@@ -23,11 +23,52 @@
             </div>
             <hr/>
         <%end%>
+        <button class="ui right floated primary button" onclick="export_site()">
+          Export
+          <i class="right chevron icon"></i>
+        </button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  $('.ui.dropdown').dropdown();
+    $('.ui.dropdown').dropdown();
+
+    function export_site() {
+        arr = [];
+        var hash = new Object(); // or just {}
+        $('.page-item').each(function(){
+            hash[$(this).data("id")] = ($(this).find('a.transition')).map(function(){return $(this).data("value");}).get()
+//            var page = {
+//                id: $(this).data("id"),
+//                articles: ($(this).find('a.transition')).map(function(){return $(this).data("value");}).get()
+//            };
+//        arr.push(page);
+        });
+        console.log(hash);
+        $.ajax({
+            type: 'GET',
+            url: 'export',
+            dataType: 'json',
+            data: {'web': hash},
+            success:function(data) {
+                console.log(data)
+                window.location.href = 'download?file_path=' + data.url
+            }
+        });
+    }
+
+    function preview(pageId) {
+      var ids = ($('#' + pageId).find('a.transition')).map(function(){return $(this).data("value");}).get();
+      $.ajax({
+          type: 'GET',
+          url: 'preview',
+          dataType: 'json',
+          data: {'articleIds': ids, 'templateId' : <%=@templateId%>},
+          success:function(data) {
+
+          }
+      });
+    }
 </script>
