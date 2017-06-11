@@ -3,6 +3,7 @@
     <div class="ten wide column">
       <div class="ui devided items">
         <% @pages.each.with_index do |c, i|%>
+
             <div class="item page-item" data-id="<%= c.id %>">
               <div class="image">
                 <img src="../../assets/indexbackground.png"/>
@@ -12,12 +13,17 @@
                 <div class="description">
                   <%=c.content%>
                 </div>
-                <div class="extra">
-                  <select class="ui fluid dropdown selection multiple">
+                <div class="extra" id="page<%=i%>">
+                  <select name="articles" class="ui fluid dropdown multiple">
+                    <option value="">Articles</option>
                     <% @articles.each do |p|%>
-                      <option value="<%=p.id%>"><%=p.title%></option>
+                        <option value="<%=p.id%>"><%=p.title%></option>
                     <%end%>
                   </select>
+                  <button class="ui right floated primary button" onclick="preview('page<%=i%>', <%=c.id%>)">
+                    Preview
+                    <i class="right chevron icon"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -59,13 +65,26 @@
         });
     }
 
-    function preview(pageId) {
-      var ids = ($('#' + pageId).find('a.transition')).map(function(){return $(this).data("value");}).get();
-      $.ajax({
-          type: 'GET',
-          url: 'preview',
-          dataType: 'json',
-          data: {'articleIds': ids, 'templateId': <%=@templateId%>}
-      });
+    function preview(id, pageId) {
+        var articleIds = ($('#' + id).find('a.transition')).map(function(){return $(this).attr("data-value");}).get();
+
+        $.ajax({
+            type: 'GET',
+            url: 'previewajax',
+            dataType: 'json',
+            data: {
+                'templateId' : <%=@templateId%>,
+                'pageId' : pageId,
+                'articleIds': articleIds
+            },
+            success: function(result){
+                if(result){
+                    window.location.href = "preview"
+                }
+            },
+            error: function(){
+                alert("Error")
+            }
+        });
     }
 </script>

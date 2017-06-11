@@ -6,15 +6,33 @@ class PagesController < ApplicationController
     @articles = Article.all
   end
 
-  def preview
+  def previewajax
+    @templateId = params[:templateId]
+    @pageId = params[:pageId]
     @ids = params[:articleIds]
     @articles = Array.new
-
     @ids.each do |id|
       @article = Article.find(id)
       @articles << @article
     end
-    render :json => @articles
+
+    flash[:template_id] = @templateId
+    flash[:page_id] = @pageId
+    flash[:selected_articles] = @articles
+
+    jsonRes = {
+        :success => true,
+    }
+
+    render :json => jsonRes
+  end
+
+  def preview
+    @template = Template.find(flash[:template_id])
+    @page = Page.find(flash[:page_id])
+    @articles = flash[:selected_articles]
+
+
   end
 
   def export

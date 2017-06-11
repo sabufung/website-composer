@@ -1,5 +1,7 @@
-<ul>
-  <% @articles.each do |a|%>
-    <li><%= a.title %></li>
-  <%end%>
-</ul>
+
+<p><%=@page.content.html_safe%></p>
+<p><%=@template.name%></p>
+
+<%@articles.each do |a|%>
+    <p><%=a['title']%></p>
+<%end%> 
