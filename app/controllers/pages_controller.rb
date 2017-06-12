@@ -31,8 +31,6 @@ class PagesController < ApplicationController
     @template = Template.find(flash[:template_id])
     @page = Page.find(flash[:page_id])
     @articles = flash[:selected_articles]
-
-
   end
 
   def export
