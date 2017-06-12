@@ -47,13 +47,13 @@ class PagesController < ApplicationController
       web_page = Page.find(page[0])
       web_page.content.gsub!(/%ARTICLE%/, @articles)
 
-      File.open("public/output/#{web_page.name}.html", 'w+') do |f|
+      File.open("#{Rails.root}/assets/output/#{web_page.name}.html", 'w+') do |f|
         f.write(web_page)
       end
       input_filenames << "#{web_page.name}.html"
     end
-    folder = "public/output"
-    zipfile_name = "public/output/archive.zip"
+    folder = "#{Rails.root}/assets/output"
+    zipfile_name = "#{Rails.root}/assets/output/archive.zip"
     File.delete(zipfile_name) if File.exist?(zipfile_name)
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
       input_filenames.each do |filename|
