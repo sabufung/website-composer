@@ -67,6 +67,7 @@ class PagesController < ApplicationController
   end
 
   def download
-    send_file(params[:file_path])
+    zip_data = File.read(params[:file_path])
+    send_data(zip_data, :type => 'application/zip', :filename => "archive.zip")
   end
 end
