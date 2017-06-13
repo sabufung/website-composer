@@ -65,8 +65,8 @@
 
   <div class="ui three column grid">
     <% @pages.each.with_index do |c, i|%>
-        <div class="column">
-          <div class="ui fluid card" data-id="<%= c.id %>">
+        <div class="column ">
+          <div class="ui fluid card page-item" data-id="<%= c.id %>">
             <div class="content">
               <h3><%=c.name%></h3>
             </div>
