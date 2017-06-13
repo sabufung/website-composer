@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get 'templates/index' => 'templates#index' , as:'templates'
 
   get 'pages/index' => 'pages#index', as: 'pages'
+  get 'pages/previewajax' => 'pages#previewajax'
+  get 'pages/preview' => 'pages#preview', as: 'preview'
 
   get 'pages/preview' => 'pages#preview', as: 'preview'
   get 'pages/previewajax' => 'pages#previewajax'
