@@ -46,8 +46,10 @@ class PagesController < ApplicationController
       web_page = Page.find(page[0])
       web_page.content.gsub!(/%ARTICLE%/, @articles)
       File.open("#{Rails.root}/tmp/#{web_page.name}.html", 'w+') do |f|
-            f.write(web_page)
+        f.write(web_page.content)
       end
+
+
       input_filenames_path << "#{web_page.name}.html"
 
 
@@ -60,10 +62,10 @@ class PagesController < ApplicationController
     end
     temp_file = Tempfile.new(["archive"])
     input_filenames_path.each do |file|
-      Zip::OutputStream.open("#{Rails.root}/tmp/#{file}")
+      # Zip::OutputStream.open("#{Rails.root}/tmp/#{file}")
       Zip::File.open(temp_file.path, Zip::File::CREATE) do |zip|
         #Put files in here
-        zip.add(file, "#{Rails.root}/tmp/#{file}")
+        zip.add(File.basename("#{Rails.root}/tmp/#{file}"), "#{Rails.root}/tmp/#{file}")
       end
 
     end
