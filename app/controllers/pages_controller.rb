@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   require 'zip'
   def index
-    @templateId = params[:id]
+    @template = Template.find(params[:id])
     @pages = Template.find(params[:id]).pages
     @articles = Article.all
   end
