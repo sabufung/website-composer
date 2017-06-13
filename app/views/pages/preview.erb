@@ -1,6 +1,37 @@
-<p><%=@page.content.html_safe%></p>
-<p><%=@template.name%></p>
+<div class="ui inverted menu">
+  <div class="ui container">
+    <a href="#" class="header item">
+      Website Composer
+    </a>
+    <a href="#" class="item">Home</a>
+    <div class="ui simple dropdown item">
+      Dropdown <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item" href="#">Link Item</a>
+        <a class="item" href="#">Link Item</a>
+        <div class="divider"></div>
+        <div class="header">Header Item</div>
+        <div class="item">
+          <i class="dropdown icon"></i>
+          Sub Menu
+          <div class="menu">
+            <a class="item" href="#">Link Item</a>
+            <a class="item" href="#">Link Item</a>
+          </div>
+        </div>
+        <a class="item" href="#">Link Item</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%@articles.each do |a|%>
-    <p><%=a['title']%></p>
-<%end%>
+<div class="template-area">
+  <%=@template.content.html_safe%>
+</div>
+
+<script>
+  $('.page-area').html('<%=@page.content.html_safe%>');
+  <%@articles.each do |article|%>
+    $('.article-area').append('<%=article['content'].html_safe%>');
+  <%end%>
+</script>
