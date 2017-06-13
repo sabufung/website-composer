@@ -31,6 +31,7 @@
 
 <script>
   $('.page-area').html('<%=@page.content.html_safe%>');
+  $('.article-area').empty();
   <%@articles.each do |article|%>
     $('.article-area').append('<%=article['content'].html_safe%>');
   <%end%>
