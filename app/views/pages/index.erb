@@ -1,45 +1,114 @@
-<div class="ui grid container">
-  <div class="row">
-    <div class="ten wide column">
-      <div class="ui devided items">
-        <% @pages.each.with_index do |c, i|%>
-
-            <div class="item page-item" data-id="<%= c.id %>">
-              <div class="image">
-                <img src="../../assets/indexbackground.png"/>
-              </div>
-              <div class="content">
-                <p class="header"><%=c.name%></p>
-                <div class="description">
-                  <%=c.content%>
-                </div>
-                <div class="extra" id="page<%=i%>">
-                  <select name="articles" class="ui fluid dropdown multiple">
-                    <option value="">Articles</option>
-                    <% @articles.each do |p|%>
-                        <option value="<%=p.id%>"><%=p.title%></option>
-                    <%end%>
-                  </select>
-                  <button class="ui right floated primary button" onclick="preview('page<%=i%>', <%=c.id%>)">
-                    Preview
-                    <i class="right chevron icon"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <hr/>
-        <%end%>
-        <button class="ui right floated primary button" onclick="export_site()">
-          Export
-          <i class="right chevron icon"></i>
-        </button>
+<div class="ui inverted menu">
+  <div class="ui container">
+    <a href="#" class="header item">
+      Website Composer
+    </a>
+    <a href="#" class="item">Home</a>
+    <div class="ui simple dropdown item">
+      Dropdown <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item" href="#">Link Item</a>
+        <a class="item" href="#">Link Item</a>
+        <div class="divider"></div>
+        <div class="header">Header Item</div>
+        <div class="item">
+          <i class="dropdown icon"></i>
+          Sub Menu
+          <div class="menu">
+            <a class="item" href="#">Link Item</a>
+            <a class="item" href="#">Link Item</a>
+          </div>
+        </div>
+        <a class="item" href="#">Link Item</a>
       </div>
     </div>
   </div>
 </div>
 
+<h1 class="ui center aligned header"><%=@template.name%>'s Pages</h1>
+
+<div class="ui main container">
+
+  <!--<div class="ui grid">-->
+  <!--<%@pages.each do |page|%>-->
+      <!--<div class="sixteen wide column">-->
+      <!--<div class="ui segment">-->
+      <!--<button class="ui aligned right primary button">Preview</button>-->
+      <!--<h3><%=page.name%></h3>-->
+
+      <!--<div class="ui grid">-->
+      <!--<div class="four wide column">-->
+      <!--<div class="ui vertical fluid tabular menu">-->
+      <!--<a class="item active">-->
+      <!--Standard-->
+      <!--</a>-->
+      <!--<%@articles.each do |article|%>-->
+          <!--<a class="item">-->
+          <!--<%=article['title']%>-->
+          <!--</a>-->
+          <!--<%end%>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--<div class="twelve wide stretched column">-->
+      <!--<div class="ui segment" id="preview-segment">-->
+      <!--Preview here-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--<%end%>-->
+  <!--</div>-->
+
+
+
+
+  <div class="ui three column grid">
+    <% @pages.each.with_index do |c, i|%>
+        <div class="column">
+          <div class="ui fluid card" data-id="<%= c.id %>">
+            <div class="content">
+              <h3><%=c.name%></h3>
+            </div>
+            <div class="image">
+              <img src="../../assets/indexbackground.png"/>
+            </div>
+            <div class="content">
+              <div class="extra" id="page<%=i%>">
+                <select class="ui fluid dropdown" multiple="">
+                  <option value="">Select your Articles...</option>
+                  <% @articles.each do |p|%>
+                      <option value="<%=p.id%>"><%=p.title%></option>
+                  <%end%>
+                </select>
+                <br/>
+                <button class="ui right floated primary button" onclick="preview('page<%=i%>', <%=c.id%>)">
+                  Preview
+                  <i class="right chevron icon"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+    <%end%>
+  </div>
+
+
+  <button class="ui right floated primary button" onclick="export_site()">
+    Export
+    <i class="right chevron icon"></i>
+  </button>
+</div>
+
 <script>
     $('.ui.dropdown').dropdown();
+
+//    $('.item').click(function () {
+//        $(this).siblings('.active').removeClass('active');
+//        $(this).addClass('active');
+//
+//        $('#preview-segment').html('<h1>'+this.text+'</h1>')
+//    });
 
     function export_site() {
         arr = [];
@@ -73,7 +142,7 @@
             url: 'previewajax',
             dataType: 'json',
             data: {
-                'templateId' : <%=@templateId%>,
+                'templateId' : <%=@template.id%>,
                 'pageId' : pageId,
                 'articleIds': articleIds
             },
