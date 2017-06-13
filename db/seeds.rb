@@ -6,6 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
-ya = Template.create! :name => "Glorious Blogger"
-Article.create! :title => "Humor", :content => "<p>something</p>"
-Page.create! :content => "<p>something</p>", :template => ya, :name => 'homepage'
+ya = Template.create! :name => "Glorious Blogger" , :content => ""
+Article.create! :title => "Humor", :content => "<img class=\"wireframe\" src=\"https://semantic-ui.com/examples/assets/images/wireframe/media-paragraph.png\">"
+Page.create! :content => " <h1 class=\"ui header\">Semantic UI Fixed Template</h1> <p>This is a basic fixed menu template using fixed size containers.</p><p>A text container is used for the main container, which is useful for single column layouts</p><div class=\"article-area\"></div>", :template => ya, :name => 'homepage'
