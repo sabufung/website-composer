@@ -41,7 +41,7 @@ gem 'ckeditor'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 gem 'rubyzip'
-
+gem 'non-stupid-digest-assets', '~> 1.0.4'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
