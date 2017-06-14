@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require_tree .
 //= require semantic_ui/semantic_ui
+//= require ckeditor/init
+
 var CKEDITOR_BASEPATH = '/assets/ckeditor/';
