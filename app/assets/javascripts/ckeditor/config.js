@@ -1,5 +1,5 @@
 if (typeof(CKEDITOR) != 'undefined') {
-    CKEDITOR.replace( 'editor', {
-        removePlugins: 'htmlwriter'
-    } );
+    CKEDITOR.editorConfig = function (config) {
+        config.removePlugins= 'htmlwriter'
+    }
 }
