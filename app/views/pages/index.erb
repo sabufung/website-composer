@@ -78,8 +78,8 @@
 
   <!--<div class="ui three column grid">-->
   <!--<% @pages.each.with_index do |c, i|%>-->
-      <!--<div class="column">-->
-      <!--<div class="ui fluid card" data-id="<%= c.id %>">-->
+      <!--<div class="column ">-->
+      <!--<div class="ui fluid card page-item" data-id="<%= c.id %>">-->
       <!--<div class="content">-->
       <!--<h3><%=c.name%></h3>-->
       <!--</div>-->
@@ -106,11 +106,6 @@
       <!--<%end%>-->
   <!--</div>-->
 
-
-  <!--<button class="ui right floated primary button" onclick="export_site()">-->
-  <!--Export-->
-  <!--<i class="right chevron icon"></i>-->
-  <!--</button>-->
 </div>
 
 <script>
@@ -120,6 +115,7 @@
             onOpen: function () {
                 var previewSegment = $(this).find('#preview-segment');
                 previewSegment.html('<%=@template.content.html_safe%>');
+
 
                 var pageId = $(this).find('#pageid').attr('data-value');
 
