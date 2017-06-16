@@ -28,31 +28,66 @@
 <h1 class="ui center aligned header"><%=@template.name%>'s Pages</h1>
 
 <div class="ui main container">
+  <div class="ui grid">
+    <div class="four wide column">
+      <div class="ui styled accordion">
+        <%@pages.each.with_index do |page, i|%>
+            <div class="title">
+              <h3>
+                <i class="dropdown icon"></i>
+                <%=page.name%>
+              </h3>
+            </div>
+            <div class="content" >
+              <div class="hidden" id="pageid" data-value="<%=page.id%>"></div>
+              <div class="ui divided list middle aligned">
+                <%@articles.each do |article|%>
+                    <div class="item">
+                      <div class="right floated content">
+                        <a><i class="add circle icon" style="font-size: 2em;" onclick="appendArticle(<%=article.id%>, this)"></i></a>
+                      </div>
+                      <div class="content" style="margin-top: 12px" data-value="<%=article.id%>">
+                        <%=article.title%>
+                      </div>
+                    </div>
+                <%end%>
+              </div>
+            </div>
+        <%end%>
+      </div>
+    </div>
+    <div class="twelve wide stretched column" style="height: 800px">
+      <div class="ui segment" id="preview-segment" style="overflow: auto">
+      </div>
+    </div>
+  </div>
 
-  <!--<div class="ui grid">-->
-  <!--<%@pages.each do |page|%>-->
-      <!--<div class="sixteen wide column">-->
-      <!--<div class="ui segment">-->
-      <!--<button class="ui aligned right primary button">Preview</button>-->
-      <!--<h3><%=page.name%></h3>-->
 
-      <!--<div class="ui grid">-->
-      <!--<div class="four wide column">-->
-      <!--<div class="ui vertical fluid tabular menu">-->
-      <!--<a class="item active">-->
-      <!--Standard-->
-      <!--</a>-->
-      <!--<%@articles.each do |article|%>-->
-          <!--<a class="item">-->
-          <!--<%=article['title']%>-->
-          <!--</a>-->
+
+
+  <!--<div class="ui three column grid">-->
+  <!--<% @pages.each.with_index do |c, i|%>-->
+      <!--<div class="column ">-->
+      <!--<div class="ui fluid card page-item" data-id="<%= c.id %>">-->
+      <!--<div class="content">-->
+      <!--<h3><%=c.name%></h3>-->
+      <!--</div>-->
+      <!--<div class="image">-->
+      <!--<img src="../../assets/indexbackground.png"/>-->
+      <!--</div>-->
+      <!--<div class="content">-->
+      <!--<div class="extra" id="page<%=i%>">-->
+      <!--<select class="ui fluid dropdown" multiple="">-->
+      <!--<option value="">Select your Articles...</option>-->
+      <!--<% @articles.each do |p|%>-->
+          <!--<option value="<%=p.id%>"><%=p.title%></option>-->
           <!--<%end%>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div class="twelve wide stretched column">-->
-      <!--<div class="ui segment" id="preview-segment">-->
-      <!--Preview here-->
-      <!--</div>-->
+      <!--</select>-->
+      <!--<br/>-->
+      <!--<button class="ui right floated primary button" onclick="preview('page<%=i%>', <%=c.id%>)">-->
+      <!--Preview-->
+      <!--<i class="right chevron icon"></i>-->
+      <!--</button>-->
       <!--</div>-->
       <!--</div>-->
       <!--</div>-->
@@ -60,55 +95,67 @@
       <!--<%end%>-->
   <!--</div>-->
 
-
-
-
-  <div class="ui three column grid">
-    <% @pages.each.with_index do |c, i|%>
-        <div class="column ">
-          <div class="ui fluid card page-item" data-id="<%= c.id %>">
-            <div class="content">
-              <h3><%=c.name%></h3>
-            </div>
-            <div class="image">
-              <img src="../../assets/indexbackground.png"/>
-            </div>
-            <div class="content">
-              <div class="extra" id="page<%=i%>">
-                <select class="ui fluid dropdown" multiple="">
-                  <option value="">Select your Articles...</option>
-                  <% @articles.each do |p|%>
-                      <option value="<%=p.id%>"><%=p.title%></option>
-                  <%end%>
-                </select>
-                <br/>
-                <button class="ui right floated primary button" onclick="preview('page<%=i%>', <%=c.id%>)">
-                  Preview
-                  <i class="right chevron icon"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-    <%end%>
-  </div>
-
-
-  <button class="ui right floated primary button" onclick="export_site()">
-    Export
-    <i class="right chevron icon"></i>
-  </button>
 </div>
 
 <script>
-    $('.ui.dropdown').dropdown();
 
-//    $('.item').click(function () {
-//        $(this).siblings('.active').removeClass('active');
-//        $(this).addClass('active');
-//
-//        $('#preview-segment').html('<h1>'+this.text+'</h1>')
-//    });
+    $(document).ready(function () {
+
+        var previewSegment = $('#preview-segment');
+        previewSegment.html('<%=@template.content.html_safe%>');
+
+
+        $('.accordion').accordion({
+            onOpening: function () {
+
+                var pageId = $(this).find('#pageid').attr('data-value');
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'appendPage',
+                    data: {
+                        'pageId': pageId
+                    },
+                    success: function (result) {
+                        $('.page-area').html(result.content);
+                    },
+                    error:function (error) {
+                        alert(error.message)
+                    }
+                })
+            }
+        });
+    })
+
+    function appendArticle(articleId, addBtn) {
+        $(addBtn).toggleClass('add check');
+
+        var articleArea = $(addBtn).closest('.four.wide').siblings().find('.article-area');
+        if($(addBtn).attr('class') == 'circle icon check'){
+            $.ajax({
+                type: 'GET',
+                url: 'appendArticle',
+                dataType: 'json',
+                data:{
+                    'articleId': articleId,
+                },
+                success:function (result) {
+                    articleArea.append(
+                        '<div '
+                        + 'id="'+articleId+'"'
+                        + '></div>'
+                    );
+                    articleArea.find('#'+articleId).append(result.content);
+                },
+                error:function (error) {
+                    alert("error");
+                }
+            })
+        }else{
+            articleArea.find('#'+articleId).remove();
+        }
+
+    }
 
     function export_site() {
         arr = [];

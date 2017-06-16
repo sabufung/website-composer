@@ -17,6 +17,9 @@ Rails.application.routes.draw do
 
   get 'pages/preview' => 'pages#preview', as: 'preview'
   get 'pages/previewajax' => 'pages#previewajax'
+  get 'pages/appendPage' => 'pages#appendPage'
+  get 'pages/appendArticle' => 'pages#appendArticle'
+
   get 'pages/download' => 'pages#download', as: 'download'
 
   get 'pages/export' => 'pages#export', as: 'export'

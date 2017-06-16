@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   require 'tempfile'
   def index
     @template = Template.find(params[:id])
-    @pages = Template.find(params[:id]).pages
+    @pages = @template.pages
     @articles = Article.all
   end
 
@@ -32,6 +32,28 @@ class PagesController < ApplicationController
     @template = Template.find(flash[:template_id])
     @page = Page.find(flash[:page_id])
     @articles = flash[:selected_articles]
+  end
+
+  def appendPage
+    @pageContent = Page.find(params[:pageId]).content
+
+    jsonRes = {
+        :succes => true,
+        :content => @pageContent
+    }
+
+    render :json => jsonRes
+  end
+
+  def appendArticle
+    @article = Article.find(params[:articleId])
+
+    jsonRes = {
+        :success => true,
+        :content => @article.content
+    }
+
+    render :json => jsonRes
   end
 
   def export
